@@ -1,0 +1,2 @@
+Desired install location
+/sgoinfre/<intraname>/miniconda3

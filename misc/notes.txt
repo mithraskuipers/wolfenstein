@@ -1,0 +1,5 @@
+conda create --name wolfenstein
+
+conda activate wolfenstein
+
+python3 -m pip install -U pygame
