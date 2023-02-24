@@ -18,6 +18,7 @@ class Game:
         pg.display.flip() # update full display surface
         # clock.tick() this method should be called once per frame. It will compute how many . milliseconds have passed since the previous call.
         # clock.tick(60) for every second AT MOST 60 frames should pass
+        # if fps was higher, the update rate would be higher, but not the total elapsed time
         self.delta_time = self.clock.tick(FPS) # for every second at most FPS frames should pass
         pg.display.set_caption(f"{self.clock.get_fps() :.1f}")
 
