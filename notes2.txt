@@ -1,0 +1,111 @@
+Wat doet de volgende code?
+
+    def movement(self):
+        sin_a = math.sin(self.angle)
+        cos_a = math.cos(self.angle)
+        dx, dy = 0, 0
+        speed = PLAYER_SPEED * self.game.delta_time
+        speed_sin = speed * sin_a
+        speed_cos = speed * cos_a
+
+De gegeven code definieert een methode genaamd movement in een Python klasse. De methode berekent de verandering in x- en y-coördinaten op basis van de huidige angle (hoek) en de snelheid (speed).
+
+De methode maakt gebruik van de math module om de sinus en cosinus van de huidige hoek te berekenen met behulp van de sin() en cos() functies. De waarden van sinus en cosinus worden toegewezen aan respectievelijk sin_a en cos_a.
+
+Vervolgens worden dx en dy geïnitialiseerd met de waarden 0, aangezien de methode de verandering in coördinaten berekent op basis van de huidige positie van het object.
+
+De snelheid wordt vermenigvuldigd met de tijd die is verstreken sinds de laatste keer dat de methode werd aangeroepen (self.game.delta_time). Dit zorgt ervoor dat de bewegingssnelheid consistent blijft, ongeacht de snelheid van de computer waarop de code wordt uitgevoerd.
+
+Vervolgens worden de waarden van speed_sin en speed_cos berekend door de snelheid te vermenigvuldigen met de sinus en cosinus van de hoek, respectievelijk. Deze waarden geven de verandering in x en y coördinaten aan voor een object dat beweegt in de richting van de huidige hoek.
+
+De methode retourneert de waarden van dx en dy als een tuple (dx, dy) om te worden gebruikt in de rest van het programma.
+
+
+
+
+MithrasX
+Kun je uitleggen waarom sinus en cosinus nodig zijn om de beweging te berekenen in een raycaster
+Ja, zeker!
+
+Een raycaster is een algoritme dat vaak wordt gebruikt om 3D-scènes weer te geven in 2D-omgevingen, zoals computerspellen. Het algoritme werkt door een virtuele camera te plaatsen in een 3D-ruimte en een aantal stralen (raycasts) te projecteren vanuit de camera in verschillende richtingen. Deze stralen raken vervolgens de objecten in de scène en geven informatie over de afstanden en kleuren van deze objecten terug aan de camera.
+
+Bij het berekenen van de beweging van de camera in een raycaster, is het nodig om de sinus en cosinus functies te gebruiken om de bewegingsvector van de camera te berekenen op basis van de huidige hoek (richting) van de camera.
+
+De bewegingsvector van de camera wordt bepaald door de snelheid (speed) van de camera te vermenigvuldigen met de cosinus en sinus van de hoek (angle) waarin de camera zich beweegt. Dit komt omdat de cosinus en sinus van de hoek de x- en y-componenten van de bewegingsvector aangeven.
+
+De cosinus van de hoek (cos(angle)) geeft de verandering in de x-richting aan (de horizontale beweging), terwijl de sinus van de hoek (sin(angle)) de verandering in de y-richting aangeeft (de verticale beweging).
+
+In een raycaster is de hoek (angle) vaak de richting waarin de camera kijkt. Door de bewegingsvector van de camera te berekenen op basis van de hoek van de camera, kan de camera worden verplaatst in de juiste richting.
+
+Daarom zijn de sinus en cosinus functies essentieel bij het berekenen van de beweging van een camera in een raycaster.
+
+
+
+
+MithrasX
+Maar waarom gebruik je de sinus en cosinus van de huidige hoek om de beweging van de camera te berekenen? Ik begrijp de logica erachter niet.
+De reden om de sinus en cosinus te gebruiken bij het berekenen van de beweging van een camera in een raycaster heeft te maken met de manier waarop we de bewegingsvector van de camera definiëren.
+
+De beweging van de camera kan worden beschreven door een vector in de 3D-ruimte, die bestaat uit drie componenten: x, y en z. In een 2D-omgeving, zoals een raycaster, is de z-component van de bewegingsvector echter meestal verwaarloosbaar en kunnen we ons richten op de x- en y-componenten.
+
+De hoek (angle) geeft aan in welke richting de camera kijkt, bijvoorbeeld naar links, naar rechts, omhoog of omlaag. Door de snelheid (speed) van de camera te vermenigvuldigen met de cosinus en sinus van de hoek (angle), kunnen we de horizontale (x-richting) en verticale (y-richting) componenten van de bewegingsvector bepalen.
+
+De cosinus van de hoek (cos(angle)) geeft de verandering in de x-richting aan (de horizontale beweging), terwijl de sinus van de hoek (sin(angle)) de verandering in de y-richting aangeeft (de verticale beweging).
+
+Als we bijvoorbeeld willen dat de camera naar rechts beweegt (in de positieve x-richting), dan zullen we de snelheid vermenigvuldigen met de cosinus van de hoek, omdat de cosinus van 0 graden (of 360 graden) gelijk is aan 1. Dit betekent dat de x-component van de bewegingsvector gelijk zal zijn aan de snelheid.
+
+Als we willen dat de camera omhoog beweegt (in de positieve y-richting), dan vermenigvuldigen we de snelheid met de sinus van de hoek, omdat de sinus van 90 graden gelijk is aan 1. Dit betekent dat de y-component van de bewegingsvector gelijk zal zijn aan de snelheid.
+
+Door de sinus en cosinus te gebruiken bij het berekenen van de bewegingsvector van de camera, kunnen we de beweging van de camera soepel en realistisch maken in de 2D-omgeving van een raycaster.
+
+
+
+
+MithrasX
+Maar waarom kun je op deze wijze de camera verplaatsen in de 2d wereld? Kun je in code wat voorbeelden geven
+In een 2D raycaster wordt de camera weergegeven als een punt op het scherm, dat zich kan verplaatsen in een plat vlak (de 2D-omgeving). Om de beweging van de camera te simuleren, hebben we een manier nodig om de positie van de camera te veranderen.
+
+De positie van de camera kan worden uitgedrukt als een tweedimensionale vector, die bestaat uit de horizontale (x) en verticale (y) coördinaten van de camera in de 2D-omgeving.
+
+Om de positie van de camera te veranderen, moeten we een nieuwe positie berekenen op basis van de huidige positie en de gewenste beweging. Hierbij maken we gebruik van de sinus en cosinus functies, omdat deze ons kunnen helpen om de horizontale en verticale componenten van de bewegingsvector te bepalen.
+
+Een eenvoudig voorbeeld in Python zou er als volgt uit kunnen zien:
+
+python
+Copy code
+import math
+
+class Camera:
+    def __init__(self, x, y, angle):
+        self.x = x
+        self.y = y
+        self.angle = angle
+    
+    def move_forward(self, distance):
+        dx = math.cos(self.angle) * distance
+        dy = math.sin(self.angle) * distance
+        self.x += dx
+        self.y += dy
+        
+    def move_backward(self, distance):
+        dx = math.cos(self.angle) * distance
+        dy = math.sin(self.angle) * distance
+        self.x -= dx
+        self.y -= dy
+        
+    def move_left(self, distance):
+        dx = math.cos(self.angle + math.pi/2) * distance
+        dy = math.sin(self.angle + math.pi/2) * distance
+        self.x += dx
+        self.y += dy
+        
+    def move_right(self, distance):
+        dx = math.cos(self.angle + math.pi/2) * distance
+        dy = math.sin(self.angle + math.pi/2) * distance
+        self.x -= dx
+        self.y -= dy
+In dit voorbeeld hebben we een Camera klasse gedefinieerd met vier methoden om de camera in verschillende richtingen te verplaatsen: move_forward, move_backward, move_left en move_right.
+
+Bij elke beweging wordt de afstand (distance) vermenigvuldigd met de cosinus en sinus van de hoek (angle) van de camera, om de horizontale en verticale componenten van de bewegingsvector te bepalen. Deze componenten (dx en dy) worden vervolgens toegevoegd aan of afgetrokken van de huidige positie van de camera (self.x en self.y), afhankelijk van de richting van de beweging.
+
+Door deze techniek te gebruiken, kunnen we de positie van de camera soepel en realistisch veranderen in de 2D-omgeving van een raycaster.
